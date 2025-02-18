@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\CarparkInfoBatchJob",
+    "\\CarparkInfoBatchJob\\bin\\Debug",
+    "\\CarparkInfoBatchJob\\bin\\Debug\\net8.0",
+    "\\CarparkInfoBatchJob\\Migrations",
+    "\\CarparkInfoBatchJob\\Models"
+  ],
+  "SelectedNode": "\\CarparkInfoBatchJob\\CarparkInfoBatchJob.cs",
+  "PreviewInSolutionExplorer": false
+}
