@@ -10,14 +10,10 @@ public class CarparkDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var projectPath = Directory.GetCurrentDirectory();
-
-        var rootPath = Directory.GetParent(projectPath).Parent.Parent.FullName;
-
+        var projectPath = AppDomain.CurrentDomain.BaseDirectory;
+        var rootPath = Directory.GetParent(projectPath).Parent.Parent.Parent.Parent.FullName;
         var databasePath = Path.Combine(rootPath, "carparks.db");
-
         Debug.WriteLine($"Using database at: {databasePath}");
-
         optionsBuilder
             .UseSqlite($"Data Source={databasePath}");
     }

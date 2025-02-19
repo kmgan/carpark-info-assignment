@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CarparkInfoAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CarparkInfoAPI.Controllers.AuthController.Login(CarparkInfoAPI.Models.User)">
+            <summary>
+            Authenticates a user and returns a JWT token.  
+            </summary>
+            <param name="loginUser">The login credentials.</param>
+            <returns>
+            - **200 OK**: Returns a JWT token upon successful authentication.  
+            - **400 Bad Request**: If the username or password is missing.  
+            - **401 Unauthorized**: If the credentials are invalid.  
+            </returns>
+            <remarks>
+            **Request Body Example:**  
+            ```json
+            {
+              "username": "test",
+              "password": "password"
+            }
+            ```  
+            **Response Example:**  
+            ```json
+            {
+              "Token": "your_jwt_token_here"
+            }
+            ```  
+            **How to Use the Token:**  
+            - Copy the `Token` value from the response.  
+            - In Swagger or API requests, enter it as `Bearer {token}` in the `Authorization` header.  
+            ```
+            Authorization: Bearer your_jwt_token_here
+            ```  
+            </remarks>
+        </member>
+        <member name="M:CarparkInfoAPI.Controllers.CarparkController.GetFilteredCarparks(System.Nullable{System.Single})">
+            <summary>
+            Retrieves a list of carparks filtered based on free parking availability, night parking, and gantry height.
+            </summary>
+            <param name="min_height">
+            The minimum vehicle height (in meters) to filter by.  
+            - If `min_height` is not provided, it defaults to `0m`.
+            - If a carpark has `gantry_height` set to `0`, it means there is **no height restriction**.
+            - Otherwise, only carparks where `gantry_height` is greater than `min_height` will be included.
+            </param>
+            <returns>A list of carparks that match the filter criteria.</returns>
+            <response code="200">Returns the filtered carparks.</response>
+            <response code="400">If the request parameters are invalid.</response>
+        </member>
+        <member name="M:CarparkInfoAPI.Controllers.UserFavouriteController.AddFavourite(System.String)">
+            <summary>
+            Adds a carpark to the user's favourites.  
+            **Requires authentication.**
+            </summary>
+            <param name="carparkNo">The carpark number to favorite. E.g.: A1</param>
+            <returns>
+            - **200 OK**: Carpark successfully added to favourites.  
+            - **401 Unauthorized**: User is not authenticated.  
+            - **404 Not Found**: User or carpark does not exist.  
+            - **409 Conflict**: Carpark is already in favourites.  
+            </returns>
+            <remarks>
+            **Authorization:** Requires a valid JWT token in the `Authorization` header.  
+            Example: `Authorization: Bearer {your_token}`
+            </remarks>
+        </member>
+    </members>
+</doc>

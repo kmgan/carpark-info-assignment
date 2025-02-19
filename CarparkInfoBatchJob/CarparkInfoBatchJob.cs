@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Diagnostics;
 using System;
 using System.Collections.Generic;
@@ -102,23 +103,36 @@ namespace CarparkInfoBatchJob
 
         public void SaveRecords(List<Carpark> validRecords)
         {
+            using var transaction = _dbContext.Database.BeginTransaction();
             try
             {
-                _dbContext.Carparks.AddRange(validRecords);
+                foreach (var record in validRecords)
+                {
+                    var existingCarpark = _dbContext.Carparks
+                        .FirstOrDefault(c => c.car_park_no == record.car_park_no);
+
+                    if (existingCarpark != null)
+                    {
+                        _dbContext.Entry(existingCarpark).CurrentValues.SetValues(record);
+                    }
+                    else
+                    {
+                        _dbContext.Carparks.Add(record);
+                    }
+                }
+
                 _dbContext.SaveChanges();
+                transaction.Commit();
                 Debug.WriteLine("Records saved successfully.");
             }
-            catch (DbUpdateException ex)
+            catch (Exception ex)
             {
-                Debug.WriteLine($"Error saving records: {ex.Message}");
+                transaction.Rollback();
+                Debug.WriteLine($"Transaction rolled back due to error: {ex.Message}");
                 if (ex.InnerException != null)
                 {
                     Debug.WriteLine($"Inner exception: {ex.InnerException.Message}");
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error saving records: {ex.Message}");
             }
         }
 
