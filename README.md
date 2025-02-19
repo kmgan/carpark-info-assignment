@@ -1,42 +1,42 @@
-# Carpark Info Assignment 🚗
+# Carpark Info Assignment
 
-This project processes car park information using a **batch job** and provides a **REST API** for accessing car park data.
+## Getting Started
 
-## 📂 Repository Structure
+To run this project, follow these steps:
 
-After cloning the repository, pay attention to these key folders:
+1. **Clone the repository:**  
+   ```sh
+   git clone https://github.com/kmgan/carpark-info-assignment.git
+   ```
 
-1. **`csv/`** – Contains the car park dataset in CSV format.
-2. **`carparks.db`** – The SQLite database storing car park data (only table structures with one dummy user record).
-3. **`ERD/`** – The Entity Relationship Diagram (ERD) for Task 1.
-4. **`CarparkInfoBatchJob/`** – The batch job for processing CSV data (Task 2).
-5. **`CarparkInfoAPI/`** – The REST API for querying car park data (Task 3).
+2. **Project Structure:**
+   - `csv/` - Contains the carpark dataset.
+   - `carparks.db` - The SQLite database (contains table structures and one dummy record for users).
+   - `ERD/` - Contains the ERD diagram for Task 1.
+   - `CarparkInfoAPI/` - Contains the API project for Task 3.
+   - `CarparkInfoBatchJob/` - Contains the batch job project for Task 2.
 
-## 🚀 How to Run
-
-### 1️⃣ Clone the Repository
+### Restore Dependencies
+Before running the applications, restore dependencies by navigating to the respective folders and running:
 ```sh
-git clone https://github.com/kmgan/carpark-info-assignment.git
-cd carpark-info-assignment
+dotnet restore
 ```
 
-### 2️⃣ Run the Batch Job (Task 2)
-- Navigate to the **`CarparkInfoBatchJob/`** folder.
-- Open `Program.cs` in Visual Studio.
-- Press **F5** or click the **Run** button.
-- **Note:** The database initially only has table structures with one dummy user record. Run the batch job first to insert car park data.
+## Running the Projects
 
-### 3️⃣ Run the API (Task 3)
-- Navigate to the **`CarparkInfoAPI/`** folder.
-- Open `Program.cs` in Visual Studio.
-- Press **F5** or click the **Run** button.
+### Running the Batch Job (Task 2)
+To insert carpark data into the database, **run the batch job first**:
+1. Open `CarparkInfoBatchJob/` in your IDE.
+2. Open `Program.cs`.
+3. Click **Run** or press `F5`.
 
-## 📝 Notes
-- Ensure **.NET 6** is installed on your machine.
-- The batch job processes the CSV and updates `carparks.db`.
-- The API queries car park data from `carparks.db`.
+### Running the API (Task 3)
+Once the database is populated, you can proceed to run the API:
+1. Open `CarparkInfoAPI/` in your IDE.
+2. Open `Program.cs`.
+3. Click **Run** or press `F5`.
+
+After running the API, you can access its endpoints to interact with the carpark data.
 
 ---
-
-
 
